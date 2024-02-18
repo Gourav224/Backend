@@ -163,8 +163,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     User.findByIdAndUpdate(
         req.user._id,
         {
-            $set: {
-                refreshToken: undefined,
+            $unset: {
+                refreshToken: 1,
             }
         },
         {
@@ -174,7 +174,6 @@ const logoutUser = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
-
     }
     return res
         .status(200)
